@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Menjar-se el món</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff1f6;--bg2:#ffe0ec;--card:#fff;--ink:#5a2a41;--mut:#8a5a72;--p1:#ffc7d9;--p2:#f78fb3;--on:#4a1830;--p3:#ffe8f0;--ok:#c5ecd2;--bad:#ffd0d0;--line:#ffcfe0;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2b1621;--bg2:#3a1d2c;--card:#43273a;--ink:#ffe6f0;--mut:#e3b0c6;--p1:#7a3a55;--p2:#b8446f;--on:#fff;--p3:#52304a;--ok:#2f5d44;--bad:#6e3038;--line:#6a3d55;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2b1621;--bg2:#3a1d2c;--card:#43273a;--ink:#ffe6f0;--mut:#e3b0c6;--p1:#7a3a55;--p2:#b8446f;--on:#fff;--p3:#52304a;--ok:#2f5d44;--bad:#6e3038;--line:#6a3d55;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);background-image:linear-gradient(160deg,var(--bg),var(--bg2));background-attachment:fixed;color:var(--ink);font:500 1rem/1.5 'Nunito',system-ui,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:16px 16px 40px}
+header{text-align:center;padding:12px 0 8px;position:relative}
+h1{font:700 clamp(2.1rem,8vw,3.2rem)/1.05 'Fredoka',system-ui,sans-serif;margin:6px 0 4px;letter-spacing:.01em}
+.tag{color:var(--mut);margin:0}
+.fl{font-size:1.9rem;letter-spacing:.35rem;animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.pts{position:absolute;right:0;top:8px;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:4px 12px;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px}
+.g{display:flex;flex-direction:column;gap:2px;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:24px 24px 24px 8px;padding:16px;color:var(--ink);font:inherit;cursor:pointer;transition:transform .15s}
+.g:nth-child(even){background:var(--p3);border-radius:24px 8px 24px 24px}
+.g:hover{transform:translateY(-3px) rotate(-.6deg)}
+.ge{font-size:2.4rem;line-height:1.1}
+.g b{font:700 1.15rem 'Fredoka',sans-serif}
+.g small{color:var(--mut)}
+button:focus-visible{outline:3px solid var(--p2);outline-offset:2px}
+.bar{display:flex;align-items:center;gap:12px;margin:8px 0 12px}
+.bar b{font:700 1.4rem 'Fredoka',sans-serif}
+.btn,.chip{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 16px;font:700 .95rem 'Nunito',sans-serif;cursor:pointer}
+.pri{background:var(--p2);border-color:var(--p2);color:var(--on)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:28px;padding:22px 18px;text-align:center}
+.big{font-size:4.5rem;line-height:1.1}
+h2{font:600 1.3rem/1.3 'Fredoka',sans-serif;margin:8px 0}
+.sub{color:var(--mut);margin:4px 0}.c{text-align:center}
+.opts{display:grid;gap:10px;margin-top:16px}
+.opt{padding:13px 14px;border-radius:18px;border:2px solid var(--line);background:var(--p3);color:var(--ink);font:700 1.05rem 'Nunito',sans-serif;cursor:pointer}
+.opt:disabled{cursor:default}
+.opt.ok{background:var(--ok);border-color:#5fbf84}
+.opt.no{background:var(--bad);border-color:#e57a7a}
+.fb{min-height:1.5em;margin:14px 0 0}
+.prog{height:10px;border-radius:9px;background:var(--p3);margin-bottom:12px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--p2);border-radius:9px;transition:width .3s}
+.row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.chip.on{background:var(--p1);border-color:var(--p2)}
+.fc{width:100%;min-height:250px;display:grid;place-items:center;cursor:pointer;color:var(--ink);font:inherit}
+.w{font:700 2rem 'Fredoka',sans-serif}
+.tr{font:600 1.7rem/1.3 'Fredoka',sans-serif}
+.mg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.mc{aspect-ratio:1/.9;border-radius:20px;border:2px solid var(--line);background:var(--p1);color:var(--ink);font:700 1.1rem 'Fredoka',sans-serif;cursor:pointer;padding:4px;word-break:break-word}
+.mc.open{background:var(--card);font-size:2.2rem}
+.mc.open.t{font-size:1.15rem}
+.mc.done{background:var(--ok);border-color:#5fbf84}
+footer{text-align:center;color:var(--mut);margin-top:30px;font-weight:700}
+footer small{display:block;font-weight:500}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="pts" aria-label="Punts">⭐ <span id="pts">0</span></div>
+  <div class="fl" aria-hidden="true">🍎🥕🧀🐟🥖</div>
+  <h1>Menjar-se el món</h1>
+  <p class="tag">Practica català A2 jugant</p>
+</header>
+<main id="app"></main>
+<footer>Hecha por Aixa Ochoa 💗<small>Basada en la unitat 7 de Bàsic 2</small></footer>
+</div>
+<script>
+const $=s=>document.querySelector(s),app=$('#app');
+const sh=a=>[...a].sort(()=>Math.random()-.5);
+let pts=0;const setPts=n=>{pts+=n;$('#pts').textContent=pts};
+const say=t=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ca-ES';speechSynthesis.speak(u)}catch(e){}};
+const bar=t=>`<div class="bar"><button class="btn" id="bk">‹ Menú</button><b>${t}</b></div>`;
+const set=(t,h)=>{app.innerHTML=bar(t)+h;$('#bk').onclick=home;window.scrollTo(0,0)};
+
+const V=[
+['f','🍊','taronja','naranja'],['f','🧅','ceba','cebolla'],['f','🍆','albergínia','berenjena'],['f','🧄','all','ajo'],['f','🫑','pebrot','pimiento'],['f','🥔','patata','patata'],['f','🫛','pèsol','guisante'],['f','🍅','tomàquet','tomate'],['f','🥕','pastanaga','zanahoria'],['f','🍎','poma','manzana'],['f','🍐','pera','pera'],['f','🍈','meló','melón'],['f','🍄','bolets','setas'],['f','🍋','llimona','limón'],['f','🍓','maduixa','fresa'],
+['c','🐔','pollastre','pollo'],['c','🐇','conill','conejo'],['c','🥩','vedella','ternera'],['c','🍖','pernil','jamón'],['c','🦃','gall dindi','pavo'],['c','🐖','porc','cerdo'],['c','🍔','hamburguesa','hamburguesa'],
+['p','🐟','lluç','merluza'],['p','🦐','gamba','gamba'],['p','🐙','pop','pulpo'],['p','🦑','calamar','calamar'],['p','🦪','musclos','mejillones'],['p','🐟','tonyina','atún'],['p','🐟','bacallà','bacalao'],
+['b','🥛','llet','leche'],['b','🧀','formatge','queso'],['b','🥚','ous','huevos'],['b','🧈','mantega','mantequilla'],['b','🍞','pa','pan'],['b','🫒','olives','aceitunas'],['b','🍫','xocolata','chocolate'],['b','🍚','arròs','arroz'],['b','🍷','vi','vino'],['b','🥣','iogurt','yogur'],['b','🧂','sal','sal'],['b','🍬','sucre','azúcar'],['b','☕','cafè','café'],['b','💧','aigua','agua'],['b','🌹','rosa','rosa'],
+['x','💬','Bon dia! Què voleu?','¡Buenos días! ¿Qué desea?'],['x','💬','Voldria un quilo de pomes, si us plau.','Quisiera un kilo de manzanas, por favor.'],['x','💬','Em poseu mig quilo de tomàquets?','¿Me pone medio kilo de tomates?'],['x','💬','Teniu lluç fresc?','¿Tienen merluza fresca?'],['x','💬','Quant costa?','¿Cuánto cuesta?'],['x','💬','Alguna cosa més?','¿Algo más?'],['x','💬','No, res més. Gràcies!','No, nada más. ¡Gracias!'],['x','💬','Quant és, tot?','¿Cuánto es todo?'],['x','💬','Queda formatge?','¿Queda queso?'],['x','💬','Sí que en queda.','Sí, sí que queda.'],['x','💬','No n’hi ha gens.','No hay nada (de eso).'],['x','💬','Mitja dotzena d’ous, si us plau.','Media docena de huevos, por favor.']
+].map(([k,e,c,s])=>({k,e,c,s}));
+const FOOD=V.filter(v=>v.k!=='x');
+
+// Quin és?
+const QZ=FOOD.map(v=>({big:v.e,q:'Com es diu en català?',sub:v.s,a:v.c,o:[v.c,...sh(FOOD.filter(x=>x!==v&&x.c!==v.c)).slice(0,3).map(x=>x.c)]}));
+
+// A la botiga
+const SH=[
+['🍎','A la fruiteria vols mig quilo de tomàquets. Què dius?','Em poseu mig quilo de tomàquets?',['Els tomàquets menjo fregits.','Quants anys teniu?','Adéu, fins demà!']],
+['🥩','A la carnisseria vols un pollastre. Què dius?','Voldria un pollastre, si us plau.',['No queda gens de sal.','Jo menjo arròs a la cassola.','Teniu bacallà fresc?']],
+['🐟','A la peixateria vols saber si hi ha lluç. Què preguntes?','Teniu lluç fresc?',['Em poseu una barra de pa?','Hi ha cap pera?','Jo sóc del Perú.']],
+['🍞','Al forn vols una barra de pa. Què dius?','Una barra de pa, si us plau.',['Dos quilos de pollastre, si us plau.','Un paquet d’arròs, gràcies.','Em poseu un litre de llet?']],
+['💶','Vols saber el preu d’aquests pebrots. Què preguntes?','Quant costa un quilo de pebrots?',['Quants pebrots queden a casa?','Com vols els pebrots?','Hi ha cap pebrot al forn?']],
+['🧾','Has acabat de comprar i vols pagar. Què dius?','Quant és, tot?',['Quant de temps queda?','Que hi ha aigua?','Com es diu això?']],
+['🛒','La botiguera et diu «Alguna cosa més?» i ja tens tot. Què respons?','No, res més. Gràcies!',['No, jo menjo al forn.','Sí, és d’origen xinès.','Quant costa?']],
+['🥛','Vols una ampolla de llet i mitja dotzena d’ous. Què dius?','Una ampolla de llet i mitja dotzena d’ous, si us plau.',['Una ampolla d’ous i mitja dotzena de llet.','Un pot de llet i una dotzena de pa.','Dos quilos d’ampolla, gràcies.']],
+['🧀','Vols saber si encara hi ha formatge. Què preguntes?','Queda formatge?',['Formatge, jo menjo escalivat.','Hi ha cap quilo?','No en tinc gens, adéu.']],
+['👋','Surts de la botiga. Què dius?','Adéu, que tingueu un bon dia!',['Bon dia! Què voleu?','Quant és, tot?','Voldria un quilo de pomes.']]
+].map(([big,q,a,d])=>({big,q,a,o:[a,...d]}));
+
+// Pronoms
+const A=['el','la','els','les'],B=['en','n’','gens','cap'],C=['gens','gens de','gens d’','cap'];
+const PR=[
+['L’arròs, ___ menjo a la cassola.','el',A],['Les patates, ___ menjo fregides.','les',A],['Els pebrots, ___ menjo escalivats.','els',A],['La poma, ___ menjo al forn.','la',A],
+['El bacallà i la tonyina, ___ compro frescos.','els',A],['La tonyina i la sípia, ___ compro al supermercat.','les',A],['Com ___ vols, el meló?','el',A],
+['— Manel, que ___ queden cebes? — No, no en queden.','en',B],['— Tenim cafè? — No, no ___ tenim.','en',B],['— Que hi ha aigua? — Sí, sí que ___ hi ha.','n’',B],
+['— Quantes ampolles ___ hi ha? — N’hi ha 6.','n’',B],['No hi ha ___ oli.','gens d’',C],['No queda ___ ampolla d’oli.','cap',C],['Hi ha ___ pera?','cap',C],
+['No tinc ___ sal. Ni una mica.','gens de',C],['No queda ___ arròs.','gens d’',C],['— Hi ha ous? — No, no n’hi ha ___.','cap',B],['De sucre, no en queda ___.','gens',B],
+['— Queda formatge? — Sí que ___ queda.','en',B],['No tinc ___ julivert.','gens de',C]
+].map(([q,a,o])=>({q,a,o,sub:o===A?'Completa amb el pronom correcte.':'en / n’ = hi ha quantitat. gens / cap = no n’hi ha.'}));
+
+// Intrús
+const OD=[
+[['albergínia','llesca de pa','pebrot','ceba'],'llesca de pa','Les altres són verdures.'],
+[['llet','poma','iogurt','formatge'],'poma','Les altres són lactis.'],
+[['pernil','rap','gambes','tonyina'],'pernil','Les altres són peix i marisc.'],
+[['vedella','porc','conill','bolets'],'bolets','Les altres són carn.'],
+[['pollastre','conill','pop','vedella'],'pop','Les altres són carn.'],
+[['lluç','calamar','taronja','musclos'],'taronja','Les altres són de la peixateria.']
+].map(([o,a,e])=>({big:'🔎',q:'Quin ingredient no té res a veure amb els altres?',o,a,e}));
+
+// Animal o vegetal
+const AV=[['llet','🥛',1],['ous','🥚',1],['formatge','🧀',1],['pollastre','🐔',1],['gamba','🦐',1],['pop','🐙',1],['mantega','🧈',1],['iogurt','🥣',1],['tomàquet','🍅',0],['pastanaga','🥕',0],['arròs','🍚',0],['pa','🍞',0],['olives','🫒',0],['taronja','🍊',0],['bolets','🍄',0],['patata','🥔',0]]
+.map(([c,e,an])=>({big:e,q:`${c}: és d’origen animal o vegetal?`,a:an?'🐄 Animal':'🌱 Vegetal',o:['🐄 Animal','🌱 Vegetal'],fix:1}));
+
+function endScr(t,m,again){
+  set(t,`<div class="card"><div class="big">${m[0]}</div><h2>${m[1]}</h2><div class="row"><button class="btn pri" id="ag">Torna a jugar</button><button class="btn" id="mn">Menú</button></div></div>`);
+  $('#ag').onclick=again;$('#mn').onclick=home;
+}
+
+function quiz(t,qs,n=8){
+  const Q=sh(qs).slice(0,n);let i=0,ok=0;
+  const go=()=>{
+    if(i>=Q.length){const r=ok/Q.length;return endScr(t,[r>=.8?'🌟':r>=.5?'🍓':'🌱',`${ok} de ${Q.length} correctes`],()=>quiz(t,qs,n))}
+    const q=Q[i];
+    set(t,`<div class="prog"><i style="width:${i/Q.length*100}%"></i></div><div class="card">${q.big?`<div class="big">${q.big}</div>`:''}<h2>${q.q}</h2>${q.sub?`<p class="sub">${q.sub}</p>`:''}<div class="opts">${(q.fix?q.o:sh(q.o)).map(o=>`<button class="opt">${o}</button>`).join('')}</div><p id="fb" class="fb" aria-live="polite"></p></div>`);
+    app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+      const right=b.textContent===q.a;
+      app.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(x.textContent===q.a)x.classList.add('ok')});
+      if(right){ok++;setPts(10)}else b.classList.add('no');
+      $('#fb').innerHTML=`${right?'Molt bé! 🎉':'Gairebé! La resposta és <b>'+q.a+'</b>.'}${q.e?' '+q.e:''}<br><button class="btn pri" id="nx" style="margin-top:10px">Següent</button>`;
+      $('#nx').onclick=()=>{i++;go()};$('#nx').focus();
+    });
+  };go();
+}
+
+// Targetes
+function cards(){
+  const K={f:'🍎 Fruiteria',c:'🥩 Carnisseria',p:'🐟 Peixateria',b:'🛒 Botiga i forn',x:'💬 Frases'};
+  let cat='f',i=0,back=false;
+  const draw=()=>{
+    const L=V.filter(v=>v.k===cat),v=L[i];
+    set('Targetes',`<div class="chips">${Object.keys(K).map(k=>`<button class="chip${k===cat?' on':''}" data-k="${k}">${K[k]}</button>`).join('')}</div>
+    <button class="card fc" id="fc">${back?`<div><div class="tr">${v.s}</div><p class="sub">en castellà</p></div>`:`<div><div class="big">${v.e}</div><div class="${cat==='x'?'tr':'w'}">${v.c}</div><p class="sub">Toca la targeta per veure el significat</p></div>`}</button>
+    <div class="row"><button class="btn" id="pv">Anterior</button><button class="btn" id="sp">🔊 Escolta</button><button class="btn pri" id="nx">Següent</button></div><p class="sub c">${i+1} de ${L.length}</p>`);
+    app.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{cat=b.dataset.k;i=0;back=false;draw()});
+    $('#fc').onclick=()=>{back=!back;draw()};
+    $('#pv').onclick=()=>{i=(i-1+L.length)%L.length;back=false;draw()};
+    $('#nx').onclick=()=>{i=(i+1)%L.length;back=false;setPts(1);draw()};
+    $('#sp').onclick=()=>say(v.c);
+  };draw();
+}
+
+// Parelles
+function match(){
+  const ws=sh(FOOD.filter(v=>v.e!=='🐟')).slice(0,6);
+  const C=sh(ws.flatMap(v=>[{c:v.c,t:v.e,w:0},{c:v.c,t:v.c,w:1}]));
+  let open=[],moves=0,done=0,lock=false;
+  set('Parelles',`<p class="sub c">Uneix cada imatge amb la seva paraula. Moviments: <b id="mv">0</b></p><div class="mg">${C.map((x,i)=>`<button class="mc" data-i="${i}" aria-label="Targeta">?</button>`).join('')}</div>`);
+  app.querySelectorAll('.mc').forEach(b=>b.onclick=()=>{
+    const x=C[b.dataset.i];if(lock||b.classList.contains('open'))return;
+    b.classList.add('open');if(x.w)b.classList.add('t');b.textContent=x.t;open.push(b);
+    if(open.length===2){
+      moves++;$('#mv').textContent=moves;
+      const [a,c]=open;
+      if(C[a.dataset.i].c===C[c.dataset.i].c){a.classList.add('done');c.classList.add('done');open=[];setPts(10);if(++done===6)setTimeout(()=>endScr('Parelles',['🎉',`Ho has aconseguit en ${moves} moviments!`],match),700)}
+      else{lock=true;setTimeout(()=>{open.forEach(m=>{m.classList.remove('open','t');m.textContent='?'});open=[];lock=false},900)}
+    }
+  });
+}
+
+const G=[['cards','🃏','Targetes','Paraules i frases amb àudio'],['quiz','🖼️','Quin és?','Imatge i paraula'],['match','🧩','Parelles','Troba les parelles'],['shop','🛍️','A la botiga','Tria la frase correcta'],['pron','✏️','Pronoms','el, la, en, n’, gens, cap'],['odd','🔎','L’intrús','Quin no hi pertany?'],['av','🐄','Animal o vegetal?','Classifica els productes']];
+const R={cards,quiz:()=>quiz('Quin és?',QZ,10),match,shop:()=>quiz('A la botiga',SH,10),pron:()=>quiz('Pronoms',PR,10),odd:()=>quiz('L’intrús',OD,6),av:()=>quiz('Animal o vegetal?',AV,8)};
+function home(){
+  app.innerHTML=`<p class="sub c">Tria un joc i practica l’alimentació, la compra a les botigues i els pronoms.</p><div class="grid">${G.map(([k,e,t,d])=>`<button class="g" data-k="${k}"><span class="ge">${e}</span><b>${t}</b><small>${d}</small></button>`).join('')}</div>`;
+  app.querySelectorAll('.g').forEach(b=>b.onclick=()=>R[b.dataset.k]());
+}
+home();
+</script>
+</body>
+</html>
